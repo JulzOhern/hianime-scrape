@@ -1,5 +1,5 @@
-import axios from "axios";
-import CryptoJS from "crypto-js";
+const axios = require("axios");
+const CryptoJS = require("crypto-js");
 
 async function RapidCloud(videoUrl) {
   const serverName = "RapidCloud";
@@ -102,4 +102,4 @@ function substringBefore(str, toFind) {
   return index == -1 ? "" : str.substring(0, index);
 }
 
-export default RapidCloud;
+module.exports = RapidCloud;

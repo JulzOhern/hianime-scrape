@@ -1,8 +1,10 @@
-import { gotScraping } from "got-scraping";
-import { load } from "cheerio";
-import { SRC_BASE_URL } from "../utils/constants.js";
+const { load } = require("cheerio");
+const { SRC_BASE_URL } = require("../utils/constants");
 
-export const trendingAnime = async (req, res) => {
+let gotScraping;
+
+const trendingAnime = async (req, res) => {
+  gotScraping ??= (await import("got-scraping")).gotScraping;
   const data = [];
 
   try {
@@ -26,3 +28,5 @@ export const trendingAnime = async (req, res) => {
     return res.json(error.message);
   }
 };
+
+module.exports = { trendingAnime };

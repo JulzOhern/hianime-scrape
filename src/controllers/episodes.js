@@ -1,14 +1,14 @@
-import { load } from "cheerio";
-import {
+const { load } = require("cheerio");
+const {
   ACCEPT_ENCODING_HEADER,
   ACCEPT_HEADER,
   SRC_AJAX_URL,
   SRC_BASE_URL,
   USER_AGENT_HEADER,
-} from "../utils/constants.js";
-import axios from "axios";
+} = require("../utils/constants");
+const axios = require("axios");
 
-export const episodes = async (req, res) => {
+const episodes = async (req, res) => {
   const { id } = req.params;
   const data = {
     totalEpisodes: 0,
@@ -46,3 +46,5 @@ export const episodes = async (req, res) => {
     return res.json(error.message);
   }
 };
+
+module.exports = { episodes };

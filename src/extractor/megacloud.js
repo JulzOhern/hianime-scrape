@@ -1,5 +1,5 @@
-import axios from "axios";
-import crypto from "crypto";
+const axios = require("axios");
+const crypto = require("crypto");
 
 const megacloud = {
   script: "https://megacloud.tv/js/player/a/prod/e1-player.min.js?v=",
@@ -180,4 +180,4 @@ function matchingKey(value, script) {
   }
 }
 
-export default MegaCloud;
+module.exports = MegaCloud;

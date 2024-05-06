@@ -1,9 +1,8 @@
-import { USER_AGENT_HEADER } from "../utils/constants.js";
-import axios from "axios";
-import CryptoJS from "crypto-js";
-import { gotScraping } from "got-scraping";
+const { USER_AGENT_HEADER } = require("../utils/constants.js");
+const axios = require("axios");
+const CryptoJS = require("crypto-js");
 
-export async function Vidcloud(videoUrl, isAlternative = false) {
+async function Vidcloud(videoUrl, isAlternative = false) {
   const serverName = "VidCloud";
   const sources = [];
 
@@ -36,17 +35,17 @@ export async function Vidcloud(videoUrl, isAlternative = false) {
   }
 }
 
-export const substringBefore = (str, toFind) => {
+const substringBefore = (str, toFind) => {
   const index = str.indexOf(toFind);
   return index == -1 ? "" : str.substring(0, index);
 };
 
-export const substringAfter = (str, toFind) => {
+const substringAfter = (str, toFind) => {
   const index = str.indexOf(toFind);
   return index == -1 ? "" : str.substring(index + toFind.length);
 };
 
-export const isJson = (str) => {
+const isJson = (str) => {
   try {
     JSON.parse(str);
   } catch (e) {
@@ -54,3 +53,5 @@ export const isJson = (str) => {
   }
   return true;
 };
+
+module.exports = { Vidcloud, substringBefore, substringAfter, isJson };

@@ -1,5 +1,5 @@
-import axios from "axios";
-import { load } from "cheerio";
+const axios = require("axios");
+const { load } = require("cheerio");
 
 async function StreamTape(videoUrl) {
   const serverName = "StreamTape";
@@ -32,4 +32,4 @@ async function StreamTape(videoUrl) {
   }
 }
 
-export default StreamTape;
+module.exports = StreamTape;

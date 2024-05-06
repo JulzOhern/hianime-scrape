@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
-import { config } from "dotenv";
-import router from "./routes/index.js";
+const express = require("express");
+const cors = require("cors");
+const { config } = require("dotenv");
+const router = require("./routes/index");
 
 config();
 
@@ -15,4 +15,4 @@ app.use("/", router);
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 
-export default app;
+module.exports = app;

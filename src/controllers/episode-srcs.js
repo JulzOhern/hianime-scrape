@@ -1,18 +1,18 @@
-import { load } from "cheerio";
-import {
+const { load } = require("cheerio");
+const {
   SRC_AJAX_URL,
   SRC_BASE_URL,
   USER_AGENT_HEADER,
-} from "../utils/constants.js";
-import { retrieveServerId } from "../utils/method.js";
-import axios from "axios";
-import MegaCloud from "../extractor/megacloud.js";
-import RapidCloud from "../extractor/rapidcloud.js";
-import StreamSB from "../extractor/streamsb.js";
-import StreamTape from "../extractor/streamtape.js";
-import { Vidcloud } from "../extractor/vidcloud.js";
+} = require("../utils/constants");
+const { retrieveServerId } = require("../utils/method");
+const axios = require("axios");
+const MegaCloud = require("../extractor/megacloud");
+const RapidCloud = require("../extractor/rapidcloud");
+const StreamSB = require("../extractor/streamsb");
+const StreamTape = require("../extractor/streamtape");
+const { Vidcloud } = require("../extractor/vidcloud");
 
-export const episodeSrcs = async (req, res) => {
+const episodeSrcs = async (req, res) => {
   try {
     const { id, server, category } = req.query;
 
@@ -106,3 +106,5 @@ async function scrapeAnimeEpisodeSources(episodeId, server, category) {
     throw new Error(error.message);
   }
 }
+
+module.exports = { episodeSrcs };

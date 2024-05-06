@@ -1,8 +1,10 @@
-import { load } from "cheerio";
-import { gotScraping } from "got-scraping";
-import { SRC_BASE_URL } from "../utils/constants.js";
+const { load } = require("cheerio");
+const { SRC_BASE_URL } = require("../utils/constants");
 
-export const top10 = async (req, res) => {
+let gotScraping;
+
+const top10 = async (req, res) => {
+  gotScraping ??= (await import("got-scraping")).gotScraping;
   const data = {
     today: [],
     week: [],
@@ -51,3 +53,5 @@ export const top10 = async (req, res) => {
     return res.json(error.message);
   }
 };
+
+module.exports = { top10 };

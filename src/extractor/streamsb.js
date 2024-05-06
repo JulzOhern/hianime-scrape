@@ -1,5 +1,5 @@
-import axios from "axios";
-import { USER_AGENT_HEADER } from "../utils/constants.js";
+const axios = require("axios");
+const { USER_AGENT_HEADER } = require("../utils/constants.js");
 
 async function StreamSB(videoUrl, isAlt) {
   const sources = [];
@@ -64,4 +64,4 @@ async function StreamSB(videoUrl, isAlt) {
   return sources;
 }
 
-export default StreamSB;
+module.exports = StreamSB;

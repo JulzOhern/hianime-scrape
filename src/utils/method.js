@@ -1,4 +1,4 @@
-export function retrieveServerId($, index, category) {
+function retrieveServerId($, index, category) {
   return (
     $(`.ps_-block.ps_-block-sub.servers-${category} > .ps__-list .server-item`)
       ?.map((_, el) =>
@@ -8,3 +8,5 @@ export function retrieveServerId($, index, category) {
       ?.attr("data-id") || null
   );
 }
+
+module.exports = { retrieveServerId };

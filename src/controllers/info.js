@@ -1,8 +1,10 @@
-import { load } from "cheerio";
-import { gotScraping } from "got-scraping";
-import { SRC_BASE_URL } from "../utils/constants.js";
+const { load } = require("cheerio");
+const { SRC_BASE_URL } = require("../utils/constants");
 
-export const info = async (req, res) => {
+let gotScraping;
+
+const info = async (req, res) => {
+  gotScraping ??= (await import("got-scraping")).gotScraping;
   const { id } = req.params;
   const data = {
     info: {
@@ -114,3 +116,5 @@ export const info = async (req, res) => {
     return res.json(error.message);
   }
 };
+
+module.exports = { info };
