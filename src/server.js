@@ -14,3 +14,5 @@ app.use(cors());
 app.use("/", router);
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+
+export default app;
