@@ -7,10 +7,8 @@ const {
 const { retrieveServerId } = require("../utils/method");
 const axios = require("axios");
 const MegaCloud = require("../extractor/megacloud");
-const RapidCloud = require("../extractor/rapidcloud");
 const StreamSB = require("../extractor/streamsb");
 const StreamTape = require("../extractor/streamtape");
-const { Vidcloud } = require("../extractor/vidcloud");
 
 const episodeSrcs = async (req, res) => {
   try {
