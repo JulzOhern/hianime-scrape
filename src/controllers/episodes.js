@@ -9,7 +9,7 @@ const {
 const axios = require("axios");
 
 const episodes = async (req, res) => {
-  const { id } = req.params;
+  const { infoId } = req.params;
   const data = {
     totalEpisodes: 0,
     episodes: [],
@@ -17,14 +17,14 @@ const episodes = async (req, res) => {
 
   try {
     const resp = await axios.get(
-      `${SRC_AJAX_URL}/v2/episode/list/${id.split("-").pop()}`,
+      `${SRC_AJAX_URL}/v2/episode/list/${infoId.split("-").pop()}`,
       {
         headers: {
           Accept: ACCEPT_HEADER,
           "User-Agent": USER_AGENT_HEADER,
           "X-Requested-With": "XMLHttpRequest",
           "Accept-Encoding": ACCEPT_ENCODING_HEADER,
-          Referer: `${SRC_BASE_URL}/watch/${id}`,
+          Referer: `${SRC_BASE_URL}/watch/${infoId}`,
         },
       }
     );

@@ -5,10 +5,10 @@ let gotScraping;
 
 const info = async (req, res) => {
   gotScraping ??= (await import("got-scraping")).gotScraping;
-  const { id } = req.params;
+  const { infoId } = req.params;
   const data = {
     info: {
-      episodeId: id,
+      episodeId: infoId,
       img: null,
       title: null,
       pg: null,
@@ -32,11 +32,12 @@ const info = async (req, res) => {
       studios: null,
       producers: null,
     },
+    charactersAndVoiceActors: [],
     recommendedForYou: [],
   };
 
   try {
-    const resp = await gotScraping.get(`${SRC_BASE_URL}/${id}`);
+    const resp = await gotScraping.get(`${SRC_BASE_URL}/${infoId}`);
     const $ = load(resp.body);
 
     const selector = $("#ani_detail .anis-content");
@@ -97,6 +98,29 @@ const info = async (req, res) => {
     data.otherInfo.producers = $(selector)
       .find(".anisc-info-wrap .anisc-info div:nth-child(11) .name")
       .text();
+
+    $("#main-content .block-actors-content div:nth-child(1) .bac-item").each(
+      function () {
+        data.charactersAndVoiceActors.push({
+          character: [
+            {
+              id: $(this).find(".ltr a").attr("href").split("/")[2],
+              img: $(this).find(".ltr img").attr("data-src"),
+              name: $(this).find(".ltr .pi-detail h4").text(),
+              cast: $(this).find(".ltr .pi-detail span").text(),
+            },
+          ],
+          voiceActor: [
+            {
+              id: $(this).find(".rtl a").attr("href").split("/")[2],
+              img: $(this).find(".rtl img").attr("data-src"),
+              name: $(this).find(".rtl .pi-detail h4").text(),
+              cast: $(this).find(".rtl .pi-detail span").text(),
+            },
+          ],
+        });
+      }
+    );
 
     $("#main-content .tab-content .film_list-wrap .flw-item").each(function () {
       data.recommendedForYou.push({

@@ -7,6 +7,7 @@ const { top10 } = require("../controllers/top-10-anime");
 const { genres } = require("../controllers/genres");
 const { info } = require("../controllers/info");
 const { episodes } = require("../controllers/episodes");
+const { seasons } = require("../controllers/seasons");
 
 const router = Router();
 
@@ -21,9 +22,11 @@ router.get("/genres", genres);
 // top-airing -- most-popular -- most-favorite -- completed -- recently-updated -- recently-added -- top-upcoming
 router.get("/category/:type", category);
 
-router.get("/info/:id", info);
+router.get("/seasons/:infoId", seasons);
 
-router.get("/episodes/:id", episodes);
+router.get("/info/:infoId", info);
+
+router.get("/episodes/:infoId", episodes);
 
 router.get("/episode-srcs", episodeSrcs);
 

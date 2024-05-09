@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 5050;
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (_, res) => res.send("Hianime api"));
 app.use("/", router);
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));

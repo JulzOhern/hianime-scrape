@@ -10,7 +10,6 @@ const spotlightAnime = async (req, res) => {
   try {
     const resp = await gotScraping.get(`${SRC_BASE_URL}/home`);
     const $ = load(resp.body);
-    console.log(SRC_BASE_URL);
 
     $("#slider .swiper-wrapper .swiper-slide .deslide-item").each((i, el) => {
       const srcDetail = [];

@@ -17,14 +17,32 @@ const episodeSrcs = async (req, res) => {
     if (!id || !category) {
       throw new Error("id server and category is required");
     }
+    const animeURL = new URL(id?.split("?ep=")[0], SRC_BASE_URL)?.href;
 
-    const episodeSrcsData = await scrapeAnimeEpisodeSources(
-      id,
-      server,
-      category
-    );
+    const [episodeSrcsData, anilist_malId] = await Promise.all([
+      scrapeAnimeEpisodeSources(id, server, category),
+      axios.get(animeURL, {
+        headers: {
+          Referer: SRC_BASE_URL,
+          "User-Agent": USER_AGENT_HEADER,
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      }),
+    ]);
 
-    return res.json(episodeSrcsData);
+    const $ = load(anilist_malId.data);
+
+    try {
+      anilistID = Number(
+        JSON.parse($("body")?.find("#syncData")?.text())?.anilist_id
+      );
+      malID = Number(JSON.parse($("body")?.find("#syncData")?.text())?.mal_id);
+    } catch (err) {
+      anilistID = null;
+      malID = null;
+    }
+
+    return res.json({ ...episodeSrcsData, anilistID, malID });
   } catch (error) {
     return res.json(error.message);
   }
@@ -35,9 +53,8 @@ async function scrapeAnimeEpisodeSources(episodeId, server, category) {
     const serverUrl = new URL(episodeId);
     switch (server) {
       case "vidstreaming":
-        return await MegaCloud(serverUrl);
       case "vidcloud":
-        return await MegaCloud(serverUrl, true);
+        return await MegaCloud(serverUrl);
       case "streamsb":
         return {
           headers: {
