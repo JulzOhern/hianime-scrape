@@ -8,6 +8,7 @@ const { genres } = require("../controllers/genres");
 const { info } = require("../controllers/info");
 const { episodes } = require("../controllers/episodes");
 const { seasons } = require("../controllers/seasons");
+const { search } = require("../controllers/search");
 
 const router = Router();
 
@@ -18,6 +19,8 @@ router.get("/trending", trendingAnime);
 router.get("/top-10", top10);
 
 router.get("/genres", genres);
+
+router.get("/search", search);
 
 // top-airing -- most-popular -- most-favorite -- completed -- recently-updated -- recently-added -- top-upcoming
 router.get("/category/:type", category);

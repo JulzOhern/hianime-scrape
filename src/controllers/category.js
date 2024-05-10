@@ -26,6 +26,7 @@ const category = async (req, res) => {
         duration: $(this).find(".film-detail .fd-infor .fdi-duration").text(),
         sub: $(this).find(".film-poster .tick-sub").text(),
         dub: $(this).find(".film-poster .tick-dub").text() || null,
+        rate: $(this).find(".film-poster .tick-rate").text() || null,
       });
     });
 
