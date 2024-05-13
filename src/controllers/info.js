@@ -10,7 +10,8 @@ const info = async (req, res) => {
     info: {
       episodeId: infoId,
       img: null,
-      title: null,
+      name: null,
+      jname: null,
       pg: null,
       quality: null,
       sub: null,
@@ -45,7 +46,8 @@ const info = async (req, res) => {
     data.info.img = $(selector)
       .find(".anisc-poster .film-poster img")
       .attr("src");
-    data.info.title = $(selector).find(".film-name").text();
+    data.info.name = $(selector).find(".film-name").text();
+    data.info.jname = $(selector).find(".film-name").attr("data-jname");
     data.info.pg = $(selector).find(".film-stats .tick-pg").text();
     data.info.quality = $(selector).find(".film-stats .tick-quality").text();
     data.info.sub = $(selector).find(".film-stats .tick-sub").text();
@@ -126,7 +128,8 @@ const info = async (req, res) => {
       data.recommendedForYou.push({
         id: $(this).find("a").attr("href").split("/")[2],
         img: $(this).find("img").attr("data-src"),
-        title: $(this).find(".film-detail .film-name").text(),
+        name: $(this).find(".film-detail .film-name").text(),
+        jname: $(this).find(".film-detail .film-name a").attr("data-jname"),
         sub: $(this).find(".tick .tick-sub").text(),
         dub: $(this).find(".tick .tick-dub").text() || null,
         eps: $(this).find(".tick .tick-eps").text() || null,

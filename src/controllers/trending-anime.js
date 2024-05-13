@@ -18,7 +18,8 @@ const trendingAnime = async (req, res) => {
           id: $(this)?.find("a")?.attr("href").replace("/", "") || null,
           img: $(this)?.find("img")?.attr("data-src") || null,
           rank: $(this)?.find(".number span")?.text() || null,
-          title: $(this)?.find(".number .film-title")?.text() || null,
+          name: $(this)?.find(".number .film-title")?.text() || null,
+          jname: $(this).find(".number .film-title").attr("data-jname"),
         });
       }
     );

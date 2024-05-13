@@ -19,7 +19,8 @@ const top10 = async (req, res) => {
       data.today.push({
         id: $(this).find("a").attr("href").replace("/", ""),
         img: $(this).find("img").attr("data-src"),
-        title: $(this).find(".film-detail .film-name a").text(),
+        name: $(this).find(".film-detail .film-name a").text(),
+        jname: $(this).find(".film-detail .film-name a").attr("data-jname"),
         sub: $(this).find(".tick-sub").text(),
         dub: $(this).find(".tick-dub").text() || null,
         eps: $(this).find(".tick-eps").text() || null,
@@ -30,7 +31,8 @@ const top10 = async (req, res) => {
       data.week.push({
         id: $(this).find("a").attr("href").replace("/", ""),
         img: $(this).find("img").attr("data-src"),
-        title: $(this).find(".film-detail .film-name a").text(),
+        name: $(this).find(".film-detail .film-name a").text(),
+        jname: $(this).find(".film-detail .film-name a").attr("data-jname"),
         sub: $(this).find(".tick-sub").text(),
         dub: $(this).find(".tick-dub").text() || null,
         eps: $(this).find(".tick-eps").text() || null,
@@ -41,7 +43,8 @@ const top10 = async (req, res) => {
       data.month.push({
         id: $(this).find("a").attr("href").replace("/", ""),
         img: $(this).find("img").attr("data-src"),
-        title: $(this).find(".film-detail .film-name a").text(),
+        name: $(this).find(".film-detail .film-name a").text(),
+        jname: $(this).find(".film-detail .film-name a").attr("data-jname"),
         sub: $(this).find(".tick-sub").text(),
         dub: $(this).find(".tick-dub").text() || null,
         eps: $(this).find(".tick-eps").text() || null,

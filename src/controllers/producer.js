@@ -3,15 +3,16 @@ const { SRC_BASE_URL } = require("../utils/constants");
 
 let gotScraping;
 
-const category = async (req, res) => {
+const producers = async (req, res) => {
   gotScraping ??= (await import("got-scraping")).gotScraping;
-  const { type } = req.params;
+  const { producer } = req.params;
   const { page } = req.query;
+
   const data = [];
 
   try {
     const resp = await gotScraping.get(
-      `${SRC_BASE_URL}/${type}?page=${page || 1}`
+      `${SRC_BASE_URL}/producer/${producer}?page=${page}`
     );
     const $ = load(resp.body);
 
@@ -37,4 +38,4 @@ const category = async (req, res) => {
   }
 };
 
-module.exports = { category };
+module.exports = { producers };
