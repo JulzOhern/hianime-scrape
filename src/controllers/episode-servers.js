@@ -44,8 +44,26 @@ const episodeServers = async (req, res) => {
 
     $(`.ps_-block.ps_-block-sub.servers-sub .ps__-list .server-item`).each(
       (_, el) => {
+        const serverName = $(el).find("a").text().toLowerCase().trim();
+        let prefferedName;
+
+        switch (serverName) {
+          case "hd-1":
+            prefferedName = "mochi";
+            break;
+          case "hd-2":
+            prefferedName = "mochiya";
+            break;
+          case "streamsb":
+            prefferedName = "mochimono";
+            break;
+          case "streamtape":
+            prefferedName = "mochiKobo";
+        }
+
         data.sub.push({
-          serverName: $(el).find("a").text().toLowerCase().trim(),
+          serverName,
+          prefferedName,
           serverId: Number($(el)?.attr("data-server-id")?.trim()) || null,
         });
       }
@@ -53,8 +71,26 @@ const episodeServers = async (req, res) => {
 
     $(`.ps_-block.ps_-block-sub.servers-dub .ps__-list .server-item`).each(
       (_, el) => {
+        const serverName = $(el).find("a").text().toLowerCase().trim();
+        let prefferedName;
+
+        switch (serverName) {
+          case "hd-1":
+            prefferedName = "mochi";
+            break;
+          case "hd-2":
+            prefferedName = "mochiya";
+            break;
+          case "streamsb":
+            prefferedName = "mochimono";
+            break;
+          case "streamtape":
+            prefferedName = "mochiKobo";
+        }
+
         data.dub.push({
-          serverName: $(el).find("a").text().toLowerCase().trim(),
+          serverName,
+          prefferedName,
           serverId: Number($(el)?.attr("data-server-id")?.trim()) || null,
         });
       }
@@ -62,8 +98,26 @@ const episodeServers = async (req, res) => {
 
     $(`.ps_-block.ps_-block-sub.servers-raw .ps__-list .server-item`).each(
       (_, el) => {
+        const serverName = $(el).find("a").text().toLowerCase().trim();
+        let prefferedName;
+
+        switch (serverName) {
+          case "hd-1":
+            prefferedName = "mochi";
+            break;
+          case "hd-2":
+            prefferedName = "mochiya";
+            break;
+          case "streamsb":
+            prefferedName = "mochimono";
+            break;
+          case "streamtape":
+            prefferedName = "mochiKobo";
+        }
+
         data.raw.push({
-          serverName: $(el).find("a").text().toLowerCase().trim(),
+          serverName,
+          prefferedName,
           serverId: Number($(el)?.attr("data-server-id")?.trim()) || null,
         });
       }
