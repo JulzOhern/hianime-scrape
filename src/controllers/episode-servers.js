@@ -7,6 +7,7 @@ const {
   ACCEPT_ENCODING_HEADER,
 } = require("../utils/constants");
 const { default: axios } = require("axios");
+const { changeName } = require("../utils/change-name");
 
 let gotScraping;
 
@@ -44,22 +45,9 @@ const episodeServers = async (req, res) => {
 
     $(`.ps_-block.ps_-block-sub.servers-sub .ps__-list .server-item`).each(
       (_, el) => {
-        const serverName = $(el).find("a").text().toLowerCase().trim();
-        let prefferedName;
-
-        switch (serverName) {
-          case "hd-1":
-            prefferedName = "mochi";
-            break;
-          case "hd-2":
-            prefferedName = "mochiya";
-            break;
-          case "streamsb":
-            prefferedName = "mochimono";
-            break;
-          case "streamtape":
-            prefferedName = "mochiKobo";
-        }
+        const { serverName, prefferedName } = changeName(
+          $(el).find("a").text().toLowerCase().trim()
+        );
 
         data.sub.push({
           serverName,
@@ -71,22 +59,9 @@ const episodeServers = async (req, res) => {
 
     $(`.ps_-block.ps_-block-sub.servers-dub .ps__-list .server-item`).each(
       (_, el) => {
-        const serverName = $(el).find("a").text().toLowerCase().trim();
-        let prefferedName;
-
-        switch (serverName) {
-          case "hd-1":
-            prefferedName = "mochi";
-            break;
-          case "hd-2":
-            prefferedName = "mochiya";
-            break;
-          case "streamsb":
-            prefferedName = "mochimono";
-            break;
-          case "streamtape":
-            prefferedName = "mochiKobo";
-        }
+        const { serverName, prefferedName } = changeName(
+          $(el).find("a").text().toLowerCase().trim()
+        );
 
         data.dub.push({
           serverName,
@@ -98,22 +73,9 @@ const episodeServers = async (req, res) => {
 
     $(`.ps_-block.ps_-block-sub.servers-raw .ps__-list .server-item`).each(
       (_, el) => {
-        const serverName = $(el).find("a").text().toLowerCase().trim();
-        let prefferedName;
-
-        switch (serverName) {
-          case "hd-1":
-            prefferedName = "mochi";
-            break;
-          case "hd-2":
-            prefferedName = "mochiya";
-            break;
-          case "streamsb":
-            prefferedName = "mochimono";
-            break;
-          case "streamtape":
-            prefferedName = "mochiKobo";
-        }
+        const { serverName, prefferedName } = changeName(
+          $(el).find("a").text().toLowerCase().trim()
+        );
 
         data.raw.push({
           serverName,
