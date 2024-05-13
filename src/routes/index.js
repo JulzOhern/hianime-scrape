@@ -11,6 +11,7 @@ const { seasons } = require("../controllers/seasons");
 const { search } = require("../controllers/search");
 const { azList } = require("../controllers/az-list");
 const { producers } = require("../controllers/producer");
+const { episodeServers } = require("../controllers/episode-servers");
 
 const router = Router();
 
@@ -36,6 +37,8 @@ router.get("/seasons/:infoId", seasons);
 router.get("/info/:infoId", info);
 
 router.get("/episodes/:infoId", episodes);
+
+router.get("/episode-servers", episodeServers);
 
 router.get("/episode-srcs", episodeSrcs);
 
