@@ -29,7 +29,7 @@ const info = async (req, res) => {
       duration: null,
       status: null,
       malScore: null,
-      genres: null,
+      genres: [],
       studios: null,
       producers: null,
     },
@@ -89,7 +89,7 @@ const info = async (req, res) => {
       .find(".anisc-info-wrap .anisc-info div:nth-child(9) a")
       .each(function () {
         genres.push({
-          id: $(this).attr("href").split("/")[2],
+          id: $(this).attr("href")?.split("/")[2],
           genres: $(this).text(),
         });
       });
@@ -106,18 +106,18 @@ const info = async (req, res) => {
         data.charactersAndVoiceActors.push({
           character: [
             {
-              id: $(this).find(".ltr a").attr("href").split("/")[2],
-              img: $(this).find(".ltr img").attr("data-src"),
-              name: $(this).find(".ltr .pi-detail h4").text(),
-              cast: $(this).find(".ltr .pi-detail span").text(),
+              id: $(this).find(".ltr a").attr("href")?.split("/")[2] || null,
+              img: $(this).find(".ltr img").attr("data-src") || null,
+              name: $(this).find(".ltr .pi-detail h4").text() || null,
+              cast: $(this).find(".ltr .pi-detail span").text() || null,
             },
           ],
           voiceActor: [
             {
-              id: $(this).find(".rtl a").attr("href").split("/")[2],
-              img: $(this).find(".rtl img").attr("data-src"),
-              name: $(this).find(".rtl .pi-detail h4").text(),
-              cast: $(this).find(".rtl .pi-detail span").text(),
+              id: $(this).find(".rtl a").attr("href")?.split("/")[2] || null,
+              img: $(this).find(".rtl img").attr("data-src") || null,
+              name: $(this).find(".rtl .pi-detail h4").text() || null,
+              cast: $(this).find(".rtl .pi-detail span").text() || null,
             },
           ],
         });
@@ -126,7 +126,7 @@ const info = async (req, res) => {
 
     $("#main-content .tab-content .film_list-wrap .flw-item").each(function () {
       data.recommendedForYou.push({
-        id: $(this).find("a").attr("href").split("/")[2],
+        id: $(this).find("a").attr("href")?.split("/")[2],
         img: $(this).find("img").attr("data-src"),
         name: $(this).find(".film-detail .film-name").text(),
         jname: $(this).find(".film-detail .film-name a").attr("data-jname"),

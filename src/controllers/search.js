@@ -3,10 +3,69 @@ const { SRC_BASE_URL } = require("../utils/constants");
 
 let gotScraping;
 
+const buildUrl = ({
+  baseUrl,
+  keyword,
+  page = 1,
+  type,
+  status,
+  rated,
+  score,
+  season,
+  language,
+  sy,
+  sm,
+  sd,
+  ey,
+  em,
+  ed,
+  sort,
+  genres,
+}) => {
+  const params = new URLSearchParams({
+    keyword,
+    page,
+  });
+
+  if (type) params.append("type", type);
+  if (status) params.append("status", status);
+  if (rated) params.append("rated", rated);
+  if (score) params.append("score", score);
+  if (season) params.append("season", season);
+  if (language) params.append("language", language);
+  if (sy) params.append("sy", sy);
+  if (sm) params.append("sm", sm);
+  if (sd) params.append("sd", sd);
+  if (ey) params.append("ey", ey);
+  if (em) params.append("em", em);
+  if (ed) params.append("ed", ed);
+  if (sort) params.append("sort", sort);
+  if (genres) params.append("genres", genres);
+
+  return `${baseUrl}/search?${params.toString()}`;
+};
+
 const search = async (req, res) => {
   gotScraping ??= (await import("got-scraping")).gotScraping;
 
-  const { keyword, page } = req.query;
+  const {
+    keyword,
+    page,
+    type,
+    status,
+    rated,
+    score,
+    season,
+    language,
+    sy,
+    sm,
+    sd,
+    ey,
+    em,
+    ed,
+    sort,
+    genres,
+  } = req.query;
   const data = {
     currentPage: page || 1,
     lastPage: null,
@@ -14,9 +73,28 @@ const search = async (req, res) => {
   };
 
   try {
-    const resp = await gotScraping.get(
-      `${SRC_BASE_URL}/search?keyword=${keyword}&page=${page || 1}`
-    );
+    const url = buildUrl({
+      baseUrl: SRC_BASE_URL,
+      keyword,
+      page,
+      type,
+      status,
+      rated,
+      score,
+      season,
+      language,
+      sy,
+      sm,
+      sd,
+      ey,
+      em,
+      ed,
+      sort,
+      genres,
+    });
+
+    const resp = await gotScraping.get(url);
+
     const $ = load(resp.body);
 
     data.lastPage =
